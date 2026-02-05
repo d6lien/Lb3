@@ -1,0 +1,23 @@
+javascript:(function(){
+    const table = document.querySelector("table");
+    if (!table) { alert("Таблицю не знайдено"); return; }
+
+    const rows = Array.from(table.querySelectorAll("tr")).slice(1);
+
+    let maxTemp = -Infinity;
+    let hottestDate = "";
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        const date = cells[2]?.textContent.trim();
+        const tempMax = parseFloat(cells[3]?.textContent);
+
+        if (!isNaN(tempMax) && tempMax > maxTemp) {
+            maxTemp = tempMax;
+            hottestDate = date;
+        }
+    });
+
+    alert("Найспекотніший день: " + hottestDate + 
+          "\nТемпература: " + maxTemp + " °C");
+})();
